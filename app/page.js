@@ -13,7 +13,7 @@ export default function Home() {
   const [weatherData, setWeatherData] = useState(null);
 
   useEffect(() => {
-    if (navigator.geolocation) {
+    if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         setLatitude(position.coords.latitude);
         setLongitude(position.coords.longitude);
