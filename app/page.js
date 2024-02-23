@@ -1,5 +1,6 @@
 "use client";
 import WeatherCard from "@/components/weatherCad";
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -26,22 +27,25 @@ export default function Home() {
 
   const fetchWeatherData = async (lat, lon) => {
     try {
-      const response = await fetch(
-        `https://api.weatherapi.com/v1/current.json?key=eadf0313fb2a49d3b34161523242202 &q=${lat},${lon}`
+      const response = await axios.get(
+        `https://api.weatherapi.com/v1/current.json?key=eadf0313fb2a49d3b34161523242202&q=${lat},${lon}`
       );
-      const data = await response.json();
+      const data = response.data;
       setWeatherData(data);
+      console.log(data);
+      return data;
     } catch (error) {
       console.error("Error fetching weather data:", error);
+      throw error;
     }
   };
 
   const handleSearch = async (query) => {
     try {
-      const response = await fetch(
-        `https://api.weatherapi.com/v1/current.json?key=eadf0313fb2a49d3b34161523242202 &q=${query}`
+      const response = await axios.get(
+        `https://api.weatherapi.com/v1/current.json?key=eadf0313fb2a49d3b34161523242202&q=${query}`
       );
-      const data = await response.json();
+      const data = response.data;
       setWeatherData(data);
     } catch (error) {
       console.error("Error fetching weather data:", error);
@@ -60,13 +64,11 @@ export default function Home() {
       {weatherData ? (
         <WeatherCard
           location={weatherData.location.name}
-          weatherC={weatherData.current ? weatherData.current.temp_c : ""}
-          weatherF={weatherData.current ? weatherData.current.temp_f : ""}
-          humidity={weatherData.current ? weatherData.current.humidity : ""}
-          condition={
-            weatherData.current ? weatherData.current.condition.text : ""
-          }
-          icon={weatherData.current ? weatherData.current.condition.icon : ""}
+          weatherC={weatherData.current.temp_c}
+          weatherF={weatherData.current.temp_f}
+          humidity={weatherData.current.humidity}
+          condition={weatherData.current.condition.text}
+          icon={weatherData.current.condition.icon}
         />
       ) : (
         <p>Loading weather data...</p>
