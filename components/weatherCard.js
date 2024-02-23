@@ -1,27 +1,47 @@
 import Image from "next/image";
 const WeatherCard = ({
+  country,
   location,
   weatherC,
   weatherF,
-  humidity,
+  cloud,
   condition,
+  humidity,
   icon,
 }) => {
   return (
-    <div className="bg-red-500 p-5 rounded-sm">
-      <h2 className="text-xl font-semibold">{location}</h2>
-      <p>{weatherC}</p>
-      <p>{weatherF}</p>
-      <p>Humidity: {humidity}%</p>
-      <p>Condition: {condition}</p>
-      {icon && (
+    <div className=" rounded-lg shadow-md p-6 w-64 bg-gradient-to-r from-blue-200 to-blue-100">
+      <h2 className="text-xl font-semibold">
+        {location}, {country}
+      </h2>
+      <div className="mt-4">
         <Image
           src={`https:${icon}`}
-          width={50}
-          height={50}
-          alt="Weather icon"
+          alt="Cloud condition"
+          width={100}
+          height={100}
         />
-      )}
+      </div>
+      <div className="flex items-center justify-between mt-4">
+        <div>
+          <p className="text-gray-600">Temperature</p>
+          <p className="text-2xl font-semibold">
+            {weatherC}°C / {weatherF}°F
+          </p>
+        </div>
+        <div>
+          <p className="text-gray-600">Cloud</p>
+          <p className="text-xl font-semibold">{cloud}%</p>
+        </div>
+      </div>
+      <div className="mt-4">
+        <p className="text-gray-600">Weather Condition</p>
+        <p className="text-lg font-semibold">{condition}</p>
+      </div>
+      <div className="mt-4">
+        <p className="text-gray-600">Humidity</p>
+        <p className="text-xl font-semibold">{humidity}%</p>
+      </div>
     </div>
   );
 };

@@ -28,7 +28,7 @@ export default function Home() {
   const fetchWeatherData = async (lat, lon) => {
     try {
       const response = await axios.get(
-        `https://api.weatherapi.com/v1/current.json?key=${process.env.API_KEY}&q=${lat},${lon}`
+        `https://api.weatherapi.com/v1/current.json?key=eadf0313fb2a49d3b34161523242202&q=${lat},${lon}`
       );
       const data = response.data;
       setWeatherData(data);
@@ -43,7 +43,7 @@ export default function Home() {
   const handleSearch = async (query) => {
     try {
       const response = await axios.get(
-        `https://api.weatherapi.com/v1/current.json?key=${process.env.API_KEY}&q=${query}`
+        `https://api.weatherapi.com/v1/current.json?key=eadf0313fb2a49d3b34161523242202&q=${query}`
       );
       const data = response.data;
       setWeatherData(data);
@@ -59,26 +59,30 @@ export default function Home() {
   };
 
   return (
-    <div className="p-10">
-      <h1>Weather App</h1>
+    <div className="p-10 flex flex-col items-center justify-center bg-gray-50 min-h-screen">
+      <div className="mb-3">
+        <input
+          type="text"
+          placeholder="Location"
+          value={location}
+          onChange={handleChange}
+          className="border rounded-md w-full p-2"
+        />
+      </div>
       {weatherData ? (
         <WeatherCard
           location={weatherData.location.name}
+          country={weatherData.location.country}
           weatherC={weatherData.current.temp_c}
           weatherF={weatherData.current.temp_f}
           humidity={weatherData.current.humidity}
           condition={weatherData.current.condition.text}
           icon={weatherData.current.condition.icon}
+          cloud={weatherData.current.cloud}
         />
       ) : (
         <p>Loading weather data...</p>
       )}
-      <input
-        type="text"
-        placeholder="Enter location"
-        value={location}
-        onChange={handleChange}
-      />
     </div>
   );
 }
