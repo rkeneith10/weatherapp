@@ -1,5 +1,5 @@
 "use client";
-import WeatherCard from "@/components/weatherCad";
+import WeatherCard from "@/components/weatherCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -28,7 +28,7 @@ export default function Home() {
   const fetchWeatherData = async (lat, lon) => {
     try {
       const response = await axios.get(
-        `https://api.weatherapi.com/v1/current.json?key=eadf0313fb2a49d3b34161523242202&q=${lat},${lon}`
+        `https://api.weatherapi.com/v1/current.json?key=${process.env.API_KEY}&q=${lat},${lon}`
       );
       const data = response.data;
       setWeatherData(data);
@@ -43,7 +43,7 @@ export default function Home() {
   const handleSearch = async (query) => {
     try {
       const response = await axios.get(
-        `https://api.weatherapi.com/v1/current.json?key=eadf0313fb2a49d3b34161523242202&q=${query}`
+        `https://api.weatherapi.com/v1/current.json?key=${process.env.API_KEY}&q=${query}`
       );
       const data = response.data;
       setWeatherData(data);
