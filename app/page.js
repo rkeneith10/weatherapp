@@ -65,17 +65,17 @@ export default function Home() {
   return (
     <div className="p-10 flex flex-col items-center justify-center bg-gray-50 min-h-screen">
       <ToastContainer />
+      <div className="mb-3">
+        <input
+          type="text"
+          placeholder="Location"
+          value={location}
+          onChange={handleChange}
+          className="border rounded-md w-full p-2"
+        />
+      </div>
       {weatherData ? (
         <>
-          <div className="mb-3">
-            <input
-              type="text"
-              placeholder="Location"
-              value={location}
-              onChange={handleChange}
-              className="border rounded-md w-full p-2"
-            />
-          </div>
           <WeatherCard
             location={weatherData.location.name}
             country={weatherData.location.country}
