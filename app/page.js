@@ -60,28 +60,34 @@ export default function Home() {
 
   return (
     <div className="p-10 flex flex-col items-center justify-center bg-gray-50 min-h-screen">
-      <div className="mb-3">
-        <input
-          type="text"
-          placeholder="Location"
-          value={location}
-          onChange={handleChange}
-          className="border rounded-md w-full p-2"
-        />
-      </div>
       {weatherData ? (
-        <WeatherCard
-          location={weatherData.location.name}
-          country={weatherData.location.country}
-          weatherC={weatherData.current.temp_c}
-          weatherF={weatherData.current.temp_f}
-          humidity={weatherData.current.humidity}
-          condition={weatherData.current.condition.text}
-          icon={weatherData.current.condition.icon}
-          cloud={weatherData.current.cloud}
-        />
+        <>
+          <div className="mb-3">
+            <input
+              type="text"
+              placeholder="Location"
+              value={location}
+              onChange={handleChange}
+              className="border rounded-md w-full p-2"
+            />
+          </div>
+          <WeatherCard
+            location={weatherData.location.name}
+            country={weatherData.location.country}
+            weatherC={weatherData.current.temp_c}
+            weatherF={weatherData.current.temp_f}
+            humidity={weatherData.current.humidity}
+            condition={weatherData.current.condition.text}
+            icon={weatherData.current.condition.icon}
+            cloud={weatherData.current.cloud}
+          />
+        </>
       ) : (
-        <p>Loading weather data...</p>
+        <>
+          <div className="flex flex-col items-center justify-center">
+            <p className="text-center text-xl">Loading data...</p>
+          </div>
+        </>
       )}
     </div>
   );

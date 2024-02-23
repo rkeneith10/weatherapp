@@ -10,7 +10,7 @@ const WeatherCard = ({
   icon,
 }) => {
   return (
-    <div className=" rounded-lg shadow-md p-6 w-64 bg-gradient-to-r from-blue-200 to-blue-100">
+    <div className=" rounded-lg shadow-md p-6 sm:w-full lg:w-[400px] bg-gradient-to-r from-blue-200 to-blue-100">
       <h2 className="text-xl font-semibold">
         {location}, {country}
       </h2>
