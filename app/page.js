@@ -13,14 +13,25 @@ export default function Home() {
   const [weatherData, setWeatherData] = useState(null);
 
   useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setLatitude(position.coords.latitude);
-        setLongitude(position.coords.longitude);
-      });
-    } else {
-      toast.warning("Enable location in your browser");
-    }
+    const getLocation = () => {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setLatitude(position.coords.latitude);
+            setLongitude(position.coords.longitude);
+          },
+          (error) => {
+            if (error.code === error.PERMISSION_DENIED) {
+              toast.warning("Please enable location in your browser.");
+            }
+          }
+        );
+      } else {
+        toast.error("Geolocation is not supported in your browser.");
+      }
+    };
+
+    getLocation();
   }, []);
 
   useEffect(() => {
