@@ -11,6 +11,7 @@ export default function Home() {
   const [longitude, setLongitude] = useState(null);
   const [location, setLocation] = useState("");
   const [weatherData, setWeatherData] = useState(null);
+  const [locationDisabled, setLocationDisabled] = useState(false);
 
   useEffect(() => {
     const getLocation = () => {
@@ -22,7 +23,7 @@ export default function Home() {
           },
           (error) => {
             if (error.code === error.PERMISSION_DENIED) {
-              toast.warning("Please enable location in your browser.");
+              setLocationDisabled(true);
             }
           }
         );
@@ -72,6 +73,9 @@ export default function Home() {
     setLocation(value);
     handleSearch(value);
   };
+  const removealert = () => {
+    setLocationDisabled(false);
+  };
 
   return (
     <div className="p-10 flex flex-col items-center justify-center bg-gray-50 min-h-screen">
@@ -104,6 +108,23 @@ export default function Home() {
             <LoadingSpinner />
           </div>
         </>
+      )}
+
+      {locationDisabled && (
+        <div className="fixed inset-0 flex items-center justify-center">
+          <div className="bg-white rounded-lg p-8 shadow-md">
+            <h2 className="text-xl font-semibold mb-4">
+              Location Services Disabled
+            </h2>
+            <p>Please enable location in your browser settings.</p>
+            <div
+              className="mt-4 px-4 py-2 bg-blue-300 text-white rounded hover:bg-blue-100 focus:outline-none focus:bg-blue-100"
+              onClick={removealert}
+            >
+              Ok
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
