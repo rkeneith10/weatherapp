@@ -2,7 +2,7 @@
 import WeatherCard from "@/components/weatherCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingSpinner from "../components/spinner.js";
 
@@ -64,6 +64,7 @@ export default function Home() {
 
   return (
     <div className="p-10 flex flex-col items-center justify-center bg-gray-50 min-h-screen">
+      <ToastContainer />
       {weatherData ? (
         <>
           <div className="mb-3">
