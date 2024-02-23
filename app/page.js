@@ -2,6 +2,9 @@
 import WeatherCard from "@/components/weatherCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import LoadingSpinner from "../components/spinner.js";
 
 export default function Home() {
   const [latitude, setLatitude] = useState(null);
@@ -10,12 +13,13 @@ export default function Home() {
   const [weatherData, setWeatherData] = useState(null);
 
   useEffect(() => {
-    // Obtenir la localisation actuelle de l'utilisateur
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         setLatitude(position.coords.latitude);
         setLongitude(position.coords.longitude);
       });
+    } else {
+      toast.warning("Enable location in your browser");
     }
   }, []);
 
@@ -85,7 +89,7 @@ export default function Home() {
       ) : (
         <>
           <div className="flex flex-col items-center justify-center">
-            <p className="text-center text-xl">Loading data...</p>
+            <LoadingSpinner />
           </div>
         </>
       )}

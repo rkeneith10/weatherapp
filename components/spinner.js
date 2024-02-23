@@ -1,14 +1,10 @@
 import Image from "next/image";
+import gifspinner from "../public/images/Loading_icon.gif";
 
 const LoadingSpinner = () => {
   return (
     <div className="flex items-center justify-center h-screen">
-      <Image
-        src="../public/images/Loading_icon.gif"
-        alt="Loading"
-        width={100}
-        height={100}
-      />
+      <Image src={gifspinner} alt="Loading" width={200} height={200} />
     </div>
   );
 };
