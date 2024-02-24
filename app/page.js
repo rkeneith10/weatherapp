@@ -111,17 +111,19 @@ export default function Home() {
       )}
 
       {locationDisabled && (
-        <div className="fixed inset-0 flex items-center justify-center">
-          <div className="bg-white rounded-lg p-8 shadow-md">
-            <h2 className="text-xl font-semibold mb-4">
-              Location Services Disabled
-            </h2>
-            <p>Please enable location in your browser settings.</p>
-            <div
-              className="mt-4 px-4 py-2 bg-blue-500 text-center text-white rounded hover:bg-blue-300 focus:outline-none focus:bg-blue-100"
-              onClick={removealert}
-            >
-              Ok
+        <div className="pl-5 pr-5">
+          <div className="fixed inset-0 flex items-center justify-center">
+            <div className="bg-white rounded-lg p-8 shadow-md">
+              <h2 className="text-xl font-semibold mb-4">
+                Location Services Disabled
+              </h2>
+              <p>Please enable location in your browser settings.</p>
+              <div
+                className="mt-4 px-4 py-2 bg-blue-500 text-center text-white rounded hover:bg-blue-300 focus:outline-none focus:bg-blue-100"
+                onClick={removealert}
+              >
+                Ok
+              </div>
             </div>
           </div>
         </div>
