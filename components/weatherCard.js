@@ -54,7 +54,7 @@ const WeatherCard = ({
         {time.slice(0, 12).map((hour, index) => (
           <div
             key={index}
-            className={`p-2 ${index % 4 !== 3 ? "border-r" : ""}`}
+            className={`p-2 ${index % 4 !== 3 ? "border-r border-white" : ""}`}
           >
             <p className="font-semibold"> {hour}</p>
             <Image src={`${iconTime[index]}`} width={50} height={50} />
