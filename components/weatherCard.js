@@ -52,7 +52,10 @@ const WeatherCard = ({
 
       <div className="mt-3 grid grid-cols-4 mr-4">
         {time.slice(0, 12).map((hour, index) => (
-          <div key={index} className="p-2 mr-4  ">
+          <div
+            key={index}
+            className={`p-2 ${index % 4 !== 3 ? "border-r" : ""}`}
+          >
             <p className="font-semibold"> {hour}</p>
             <Image src={`${iconTime[index]}`} width={50} height={50} />
             <p> {weatherTimeC[index]}°C</p>
