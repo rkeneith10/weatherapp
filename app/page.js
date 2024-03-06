@@ -2,6 +2,7 @@
 import WeatherCard from "@/components/weatherCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingSpinner from "../components/spinner.js";
@@ -115,13 +116,15 @@ export default function Home() {
   return (
     <div className="p-10 flex flex-col items-center justify-center bg-gray-50 min-h-screen">
       <ToastContainer />
-      <div className="mb-3">
+      <div className="relative flex items-center mb-2">
+        <FaMapMarkerAlt className="absolute left-4 text-gray-700 h-4 w-4 top-1/2 transform -translate-y-1/2" />
         <input
           type="text"
-          placeholder="Location"
+          placeholder="Enter a location"
           value={location}
           onChange={handleChange}
-          className="border rounded-md w-full p-2"
+          readOnly
+          className="border rounded-md pl-10 w-full p-2 text-gray-700 "
         />
       </div>
       {weatherData ? (
