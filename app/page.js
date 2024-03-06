@@ -1,7 +1,6 @@
 "use client";
 import WeatherCard from "@/components/weatherCard";
 import axios from "axios";
-import Image from "next/image.js";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -130,24 +129,11 @@ export default function Home() {
             condition={weatherData.current.condition.text}
             icon={weatherData.current.condition.icon}
             cloud={weatherData.current.cloud}
+            time={datahour.map((hour) => hour.time)}
+            weatherTimeC={datahour.map((hour) => hour.temp_c)}
+            weatherTimeF={datahour.map((hour) => hour.temp_f)}
+            iconTime={datahour.map((hour) => `https:${hour.condition.icon}`)}
           />
-
-          <div className="grid grid-cols-3 gap-4">
-            {datahour.map((hour) => (
-              <div key={hour.time_epoch} className="border p-2">
-                <p>Time: {hour.time}</p>
-                <p>
-                  Temperature: {hour.temp_c}°C / {hour.temp_f}°F
-                </p>
-                <Image
-                  src={`https:${hour.condition.icon}`}
-                  alt={hour.condition.text}
-                  width={100}
-                  height={100}
-                />
-              </div>
-            ))}
-          </div>
         </>
       ) : (
         <>
