@@ -137,7 +137,6 @@ export default function Home() {
             cloud={weatherData.current.cloud}
             time={datahour.map((hour) => extractHour(hour.time))}
             weatherTimeC={datahour.map((hour) => hour.temp_c)}
-            weatherTimeF={datahour.map((hour) => hour.temp_f)}
             iconTime={datahour.map((hour) => `https:${hour.condition.icon}`)}
           />
         </>

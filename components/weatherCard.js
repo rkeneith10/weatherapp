@@ -10,7 +10,7 @@ const WeatherCard = ({
   icon,
   time,
   weatherTimeC,
-  weatherTimeF,
+
   iconTime,
 }) => {
   return (
@@ -47,15 +47,12 @@ const WeatherCard = ({
         <p className="text-xl font-semibold">{humidity}%</p>
       </div>
 
-      <div className="mt-5 grid grid-cols-6 ">
+      <div className="mt-5 grid grid-cols-8 ">
         {time.map((hour, index) => (
           <div key={index} className="p-2 mr-4  ">
             <p className="font-semibold"> {hour}</p>
             <Image src={`https:${iconTime[index]}`} width={50} height={50} />
-            <p>
-              {" "}
-              {weatherTimeC[index]}°C / {weatherTimeF[index]}°F
-            </p>
+            <p> {weatherTimeC[index]}°C</p>
           </div>
         ))}
       </div>
