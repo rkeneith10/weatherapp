@@ -26,7 +26,7 @@ const WeatherCard = ({
           height={100}
         />
       </div>
-      <div className="flex items-center justify-between mt-4">
+      <div className="flex items-center justify-between mt-2">
         <div>
           <p className="text-gray-600">Temperature</p>
           <p className="text-2xl font-semibold">
@@ -38,19 +38,19 @@ const WeatherCard = ({
           <p className="text-xl font-semibold">{cloud}%</p>
         </div>
       </div>
-      <div className="mt-4">
+      <div className="mt-2">
         <p className="text-gray-600">Weather Condition</p>
         <p className="text-lg font-semibold">{condition}</p>
       </div>
-      <div className="mt-4">
+      <div className="mt-2">
         <p className="text-gray-600">Humidity</p>
         <p className="text-xl font-semibold">{humidity}%</p>
       </div>
-      <div className="text-center font-semibold mt-4">
+      <div className="text-center font-semibold mt-3">
         Cloudy condition from 00.00-11:00
       </div>
 
-      <div className="mt-5 grid grid-cols-4 mr-4">
+      <div className="mt-3 grid grid-cols-4 mr-4">
         {time.slice(0, 12).map((hour, index) => (
           <div key={index} className="p-2 mr-4  ">
             <p className="font-semibold"> {hour}</p>
