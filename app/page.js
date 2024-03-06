@@ -123,7 +123,6 @@ export default function Home() {
           placeholder="Enter a location"
           value={location}
           onChange={handleChange}
-          readOnly
           className="border rounded-md pl-10 w-full p-2 text-gray-700 "
         />
       </div>
