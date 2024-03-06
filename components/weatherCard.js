@@ -46,6 +46,7 @@ const WeatherCard = ({
         <p className="text-gray-600">Humidity</p>
         <p className="text-xl font-semibold">{humidity}%</p>
       </div>
+      <div className="text-center">Cloudy condition from 00.00-11:00</div>
 
       <div className="mt-5 grid grid-cols-4 mr-4">
         {time.slice(0, 12).map((hour, index) => (
