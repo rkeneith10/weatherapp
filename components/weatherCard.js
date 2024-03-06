@@ -47,7 +47,7 @@ const WeatherCard = ({
         <p className="text-xl font-semibold">{humidity}%</p>
       </div>
 
-      <div className="mt-5 grid grid-cols-8 ">
+      <div className="mt-5 grid grid-cols-8 mr-3">
         {time.map((hour, index) => (
           <div key={index} className="p-2 mr-4  ">
             <p className="font-semibold"> {hour}</p>
