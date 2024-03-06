@@ -49,8 +49,8 @@ const WeatherCard = ({
 
       <div className="mt-5 flex overflow-x-auto ">
         {time.map((hour, index) => (
-          <div key={index} className="border p-2 mr-4">
-            <p> {hour}</p>
+          <div key={index} className="p-2 mr-4 flex-shrink-0 ">
+            <p className="font-semibold"> {hour}</p>
             <Image src={`https:${iconTime[index]}`} width={50} height={50} />
             <p>
               {" "}
