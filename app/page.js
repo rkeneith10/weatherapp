@@ -1,6 +1,7 @@
 "use client";
 import WeatherCard from "@/components/weatherCard";
 import axios from "axios";
+import Image from "next/image.js";
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,6 +12,7 @@ export default function Home() {
   const [longitude, setLongitude] = useState(null);
   const [location, setLocation] = useState("");
   const [weatherData, setWeatherData] = useState(null);
+  const [datahour, setDatahour] = useState([]);
   const [locationDisabled, setLocationDisabled] = useState(false);
 
   useEffect(() => {
@@ -38,6 +40,7 @@ export default function Home() {
   useEffect(() => {
     if (latitude !== null && longitude !== null) {
       fetchWeatherData(latitude, longitude);
+      fetchDatahour(latitude, longitude);
     }
   }, [latitude, longitude]);
 
@@ -49,6 +52,20 @@ export default function Home() {
       const data = response.data;
       setWeatherData(data);
       console.log(data);
+      return data;
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+      throw error;
+    }
+  };
+
+  const fetchDatahour = async (lat, lon) => {
+    try {
+      const response = await axios.get(
+        `https://api.weatherapi.com/v1/forecast.json?key=eadf0313fb2a49d3b34161523242202&q=${lat},${lon}&days=1`
+      );
+      const data = response.data;
+      setDatahour(data);
       return data;
     } catch (error) {
       console.error("Error fetching weather data:", error);
@@ -68,10 +85,23 @@ export default function Home() {
     }
   };
 
+  const handleSearchHour = async (query) => {
+    try {
+      const response = await axios.get(
+        `https://api.weatherapi.com/v1/forecast.json?key=eadf0313fb2a49d3b34161523242202&q=${query}&days=1`
+      );
+      const data = response.data;
+      setDatahour(data);
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+    }
+  };
+
   const handleChange = (e) => {
     const { value } = e.target;
     setLocation(value);
     handleSearch(value);
+    handleSearchHour(value);
   };
   const removealert = () => {
     setLocationDisabled(false);
@@ -101,6 +131,19 @@ export default function Home() {
             icon={weatherData.current.condition.icon}
             cloud={weatherData.current.cloud}
           />
+
+          {datahour.hourly.map((hour) => (
+            <div key={hour.dt}>
+              {" "}
+              // Use unique key for each data point
+              <span>{new Date(hour.dt * 1000).getHours()}:00:</span>
+              <span>{hour.temp}&deg;C</span>
+              <Image
+                src={`/* Your API's icon URL base */}${hour.weather[0].icon}@2x.png`}
+                alt="Weather icon"
+              />
+            </div>
+          ))}
         </>
       ) : (
         <>
