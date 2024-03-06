@@ -14,6 +14,12 @@ export default function Home() {
   const [datahour, setDatahour] = useState([]);
   const [locationDisabled, setLocationDisabled] = useState(false);
 
+  const extractHour = (time) => {
+    const date = new Date(time);
+    const hour = date.getHours();
+    return hour < 10 ? `0${hour}:00` : `${hour}:00`; // Formatage de l'heure (ajout de zéro devant si nécessaire)
+  };
+
   useEffect(() => {
     const getLocation = () => {
       if ("geolocation" in navigator) {
@@ -129,7 +135,7 @@ export default function Home() {
             condition={weatherData.current.condition.text}
             icon={weatherData.current.condition.icon}
             cloud={weatherData.current.cloud}
-            time={datahour.map((hour) => hour.time)}
+            time={datahour.map((hour) => extractHour(hour.time))}
             weatherTimeC={datahour.map((hour) => hour.temp_c)}
             weatherTimeF={datahour.map((hour) => hour.temp_f)}
             iconTime={datahour.map((hour) => `https:${hour.condition.icon}`)}

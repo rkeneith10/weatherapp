@@ -51,12 +51,7 @@ const WeatherCard = ({
         {time.map((hour, index) => (
           <div key={index} className="border p-2 mr-4">
             <p> {hour}</p>
-            <Image
-              src={`https:${iconTime[index]}`}
-              alt="Cloud condition"
-              width={50}
-              height={50}
-            />
+            <Image src={`https:${iconTime[index]}`} width={50} height={50} />
             <p>
               {" "}
               {weatherTimeC[index]}°C / {weatherTimeF[index]}°F
