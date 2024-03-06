@@ -65,7 +65,7 @@ export default function Home() {
         `https://api.weatherapi.com/v1/forecast.json?key=eadf0313fb2a49d3b34161523242202&q=${lat},${lon}&days=1`
       );
       const data = response.data;
-      setDatahour(data);
+      setDatahour(data.forecast.forecastday[0].hour);
       return data;
     } catch (error) {
       console.error("Error fetching weather data:", error);
@@ -91,7 +91,7 @@ export default function Home() {
         `https://api.weatherapi.com/v1/forecast.json?key=eadf0313fb2a49d3b34161523242202&q=${query}&days=1`
       );
       const data = response.data;
-      setDatahour(data);
+      setDatahour(data.forecast.forecastday[0].hour);
     } catch (error) {
       console.error("Error fetching weather data:", error);
     }
@@ -132,18 +132,22 @@ export default function Home() {
             cloud={weatherData.current.cloud}
           />
 
-          {datahour.hourly.map((hour) => (
-            <div key={hour.dt}>
-              {" "}
-              // Use unique key for each data point
-              <span>{new Date(hour.dt * 1000).getHours()}:00:</span>
-              <span>{hour.temp}&deg;C</span>
-              <Image
-                src={`/* Your API's icon URL base */}${hour.weather[0].icon}@2x.png`}
-                alt="Weather icon"
-              />
-            </div>
-          ))}
+          <div className="grid grid-cols-3 gap-4">
+            {datahour.map((hour) => (
+              <div key={hour.time_epoch} className="border p-2">
+                <p>Time: {hour.time}</p>
+                <p>
+                  Temperature: {hour.temp_c}°C / {hour.temp_f}°F
+                </p>
+                <Image
+                  src={`https:${hour.condition.icon}`}
+                  alt={hour.condition.text}
+                  width={100}
+                  height={100}
+                />
+              </div>
+            ))}
+          </div>
         </>
       ) : (
         <>
